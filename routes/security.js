@@ -10,7 +10,7 @@ router.post("/login", (req, res) => {
     console.log(body.nombre);
     let user;           
 
-    mysqlConnection.query("Select nombre, contrasena from usuario where nombre = ?", body.nombre, (err, rows, field) => {
+    mysqlConnection.query("Select nombre, contrasena from usuario where nombre = 'osmar'", body.nombre, (err, rows, field) => {
         if (!err) {
             user = rows[0];
             if (user === undefined) {
