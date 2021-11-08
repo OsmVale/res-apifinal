@@ -10,14 +10,14 @@ router.post("/login", (req, res) => {
     console.log(body.userName);
     let user;           
 
-    mysqlConnection.query("Select * usuario where nombre = 'osmar' and contrasena = '123'", body.userName, (err, rows, field) => {
+    mysqlConnection.query("Select * from usuario where nombre = 'osmar' and contrasena = '123'", body.userName, (err, rows, field) => {
         if (!err) {
             user = rows[0];
             if (user === undefined) {
                 return res.status(401).send('Usuario no Existe');
             }
             if (body.password === user.password) {
-                const token = jwt.sign({_id: user.id }, 'secret', { expiresIn: '1m' });
+                const token = jwt.sign({_id: user.id }, 'secret', { expiresIn: '10m' });
                 return res.status(200).json({ token });
             } else {
                 return res.status(401).send('Invalido');
