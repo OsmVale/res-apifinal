@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const security = require('../security/verifier');
-
 const mysqlConnection = require('../configurations/db-conf');
 const jwt = require('jsonwebtoken');
 
@@ -9,7 +8,7 @@ const jwt = require('jsonwebtoken');
 
 router.get('/estudiantes',(req,res)=>{
     console.log('get lista estudiantes')
-    mysqlConnection.query('select e.id, e.id_persona, p.nombre, p.apellido, p.fecha_nacimiento, p.direccion, e.carnet, e.fecha_ingreso, e.status from estudiante e join persona p on e.id_persona = p.id;',(err,rows,fields)=>{
+    mysqlConnection.query('select e.id, e.id_persona, e.carnet, e.fecha_ingreso, e.status from estudiante e join persona p on e.id_persona = p.id;',(err,rows,fields)=>{
         if(!err){
             res.send(rows);
         }else{
@@ -21,7 +20,7 @@ router.get('/estudiantes',(req,res)=>{
 
 router.get('/estudiantes/:id', (req,res)=>{
     console.log('get estudiante')
-    mysqlConnection.query('select e.id, e.id_persona, p.nombre, p.apellido, p.fecha_nacimiento, p.direccion, e.carnet, e.fecha_ingreso, e.status from estudiante e join persona p on e.id_persona = p.id where e.id = ?;',[req.params.id],(err,rows,fields)=>{
+    mysqlConnection.query('select e.id, e.id_persona, e.carnet, e.fecha_ingreso, e.status from estudiante e join persona p on e.id_persona = p.id where e.id = ?;',[req.params.id],(err,rows,fields)=>{
         if(!err){
             res.send(rows);
         }else{
