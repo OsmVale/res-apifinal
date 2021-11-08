@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 
 /*Estudiantes*/
 
-router.get('/estudiantes', security,(req,res)=>{
+router.get('/estudiantes',(req,res)=>{
     console.log('get lista estudiantes')
     mysqlConnection.query('select e.id, e.id_persona, p.nombre, p.apellido, p.fecha_nacimiento, p.direccion, e.carnet, e.fecha_ingreso, e.status from estudiante e join persona p on e.id_persona = p.id;',(err,rows,fields)=>{
         if(!err){
