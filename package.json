@@ -8,7 +8,7 @@
     "dev": "nodemon /index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Ronald Ruano",
+  "author": "Osmar Valenzuela",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",

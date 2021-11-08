@@ -19,7 +19,7 @@ router.get('/estudiantes', security,(req,res)=>{
     })
 });
 
-router.get('/estudiantes/:id', security,(req,res)=>{
+router.get('/estudiantes/:id', (req,res)=>{
     console.log('get estudiante')
     mysqlConnection.query('select e.id, e.id_persona, p.nombre, p.apellido, p.fecha_nacimiento, p.direccion, e.carnet, e.fecha_ingreso, e.status from estudiante e join persona p on e.id_persona = p.id where e.id = ?;',[req.params.id],(err,rows,fields)=>{
         if(!err){
@@ -31,7 +31,7 @@ router.get('/estudiantes/:id', security,(req,res)=>{
     })
 });
 
-router.post('/estudiantes', security,(req,res)=>{
+router.post('/estudiantes', (req,res)=>{
     console.log('Insert estudiantes')
     let emp=req.body;
     console.log(emp);
@@ -48,7 +48,7 @@ router.post('/estudiantes', security,(req,res)=>{
 });
 
 
-router.put('/estudiantes/:id', security,(req,res)=>{
+router.put('/estudiantes/:id', (req,res)=>{
     console.log('Update estudiantes')
     let emp=req.body;
     mysqlConnection.query('update estudiante set id_persona = ?, fecha_ingreso = ?, carnet = ?, status = ? where id = ?',
@@ -63,7 +63,7 @@ router.put('/estudiantes/:id', security,(req,res)=>{
     })
 });
 
-router.delete('/estudiantes/:id', security,(req,res)=>{
+router.delete('/estudiantes/:id', (req,res)=>{
     console.log('Delete estudiante')
     mysqlConnection.query('delete from estudiante where id = ?',[req.params.id],(err,result)=>{
         if(!err){
@@ -76,7 +76,7 @@ router.delete('/estudiantes/:id', security,(req,res)=>{
     })
 });
 
-router.get("/inicio", security,(req, res) => {
+router.get("/inicio", (req, res) => {
     console.log("get lista Persona");
     mysqlConnection.query('select p.nombre, p.apellido, e.carnet from estudiante e join persona p on e.id_persona = p.id', (err, rows, fields) => {
         if (!err) {
